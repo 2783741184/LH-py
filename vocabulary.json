@@ -1,0 +1,192 @@
+[
+  {
+    "english": "import",
+    "chinese": "导入、进口",
+    "example": "用于导入模块，如 import turtle，导入海龟绘图模块"
+  },
+  {
+    "english": "turtle",
+    "chinese": "龟、海龟",
+    "example": "python库中的一个绘图模块，如 turtle.circle(r)，画一个半径为r的圆"
+  },
+  {
+    "english": "setup(宽，高)",
+    "chinese": "设置",
+    "example": "基于turtle执行代码，如 turtle.setup(x,y),设置画布宽x高y"
+  },
+  {
+    "english": "speed(x)",
+    "chinese": "笔的速度(0-10)",
+    "example": "基于turtle执行代码，如 turtle.speed(5),将笔的速度设为5"
+  },
+
+
+  {
+    "english": "width(x)",
+    "chinese": "线条宽度",
+    "example": "基于turtle执行代码，如 turtle.width(5),将线条的粗细设为5"
+  },
+  {
+    "english": "pensize(x)",
+    "chinese": "笔的粗细",
+    "example": "基于turtle执行代码，如 turtle.pensize(x),将笔的粗细设为x"
+  },
+  {
+    "english": "penup()",
+    "chinese": "抬笔",
+    "example": "基于turtle执行代码，如 turtle.penup()"
+  },
+    {
+    "english": "pendown()",
+    "chinese": "落笔",
+    "example": "基于turtle执行代码，如 turtle.pendown()"
+  },
+
+  {
+    "english": "goto(x,y)",
+    "chinese": "去到，移到",
+    "example": "基于turtle执行代码，如 turtle.goto(x,y),去到坐标(x，y)处"
+  },
+  {
+    "english": "color(‘X’)",
+    "chinese": "颜色",
+    "example": "基于turtle执行代码，如 turtle.color(‘red’),设置笔为红色"
+  },
+  {
+    "english": "hideturtle()",
+    "chinese": "hide隐藏",
+    "example": "基于turtle执行代码，如 turtle.hideturtle(x),隐藏箭头"
+  },
+  {
+    "english": "done()",
+    "chinese": "保留窗口，不关闭窗口",
+    "example": "基于turtle执行代码，如 turtle.done(),保留画布窗口"
+  },
+
+
+  {
+    "english": "black",
+    "chinese": "黑色",
+    "example": " "
+  },
+  {
+    "english": "white",
+    "chinese": "白色",
+    "example": " "
+  },
+  {
+    "english": "red",
+    "chinese": "红色",
+    "example": " "
+  },
+  {
+    "english": "blue",
+    "chinese": "蓝色",
+    "example": " "
+  },
+  {
+    "english": "green",
+    "chinese": "绿色",
+    "example": " "
+  },
+  {
+    "english": "yellow",
+    "chinese": "黄色",
+    "example": " "
+  },
+  {
+    "english": "brown",
+    "chinese": "棕色",
+    "example": " "
+  },
+  {
+    "english": "purple",
+    "chinese": "紫色",
+    "example": " "
+  },
+
+
+
+  {
+    "english": "forward(x)",
+    "chinese": "前进、向前",
+    "example": "基于turtle执行代码，如 turtle.forward(10),前进10"
+  },
+  {
+    "english": "backward(x)",
+    "chinese": "落后、向后",
+    "example": "基于turtle执行代码，如 turtle.backward(10),后退10"
+  },
+  {
+    "english": "left(x)",
+    "chinese": "左转",
+    "example": "基于turtle执行代码，如 turtle.left(90),左转90度"
+  },
+  {
+    "english": "right(x)",
+    "chinese": "右转",
+    "example": "基于turtle执行代码，如 turtle.right(90),右转90度"
+  },
+
+
+  {
+    "english": "color(‘X’,'Y')",
+    "chinese": "笔颜色，填充颜色",
+    "example": "如 turtle.color(‘red’，‘blue’),设置笔为红色，填充蓝色"
+  },
+
+  {
+    "english": "fillcolor('X')",
+    "chinese": "fill填充",
+    "example": "基于turtle执行代码，如 turtle.fillcolor(‘blue’),填充蓝色"
+  },
+  {
+    "english": "begin_fill()",
+    "chinese": "开始填充",
+    "example": "基于turtle执行代码，如 turtle.begin_fill()，开始填充"
+  },
+  {
+    "english": "end_fill()",
+    "chinese": "结束填充",
+    "example": "基于turtle执行代码，如 turtle.end_fill()，结束填充"
+  },
+
+  {
+    "english": "circle(r)",
+    "chinese": "圆",
+    "example": "基于turtle执行代码，如 turtle.circle(5),画一个半径为5的圆"
+  },
+  {
+    "english": "circle(r，a)",
+    "chinese": "圆",
+    "example": "a为角度，如 turtle.circle(5,180),画一个半径为5的半圆"
+  },
+  {
+    "english": "shape('X')",
+    "chinese": "形状",
+    "example": "改变turtle模块的箭头形状，如 turtle.shape('turtle')"
+  },
+  {
+    "english": "setheading(a)",
+    "chinese": "设置箭头方向",
+    "example": "如 turtle.setheading(45),将箭头方向设置为45"
+  },
+
+
+
+
+
+
+
+
+  {
+    "english": "Module",
+    "chinese": "模块",
+    "example": "包含Python代码的文件，如 import math"
+  },
+  {
+    "english": "Class",
+    "chinese": "类",
+    "example": "创建对象的蓝图，如 class MyClass:"
+  }
+]

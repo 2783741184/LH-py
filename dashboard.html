@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主菜单 - 电子学会Python考试系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .dashboard-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            padding: 50px;
+            text-align: center;
+        }
+        .dashboard-header {
+            margin-bottom: 50px;
+        }
+        .dashboard-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .dashboard-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        .dashboard-actions {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .dashboard-btn {
+            width: 250px;
+            height: 200px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dashboard-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .dashboard-btn i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        .dashboard-btn h2 {
+            font-size: 1.5rem;
+        }
+        .exam-btn {
+            background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+        }
+        .admin-btn {
+            background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>电子学会 Python 1级考试系统</h1>
+            <p>请选择您要进行的操作</p>
+        </div>
+        <div class="dashboard-actions">
+            <div class="dashboard-btn exam-btn" onclick="window.location.href='exam.html'">
+                <i>📝</i>
+                <h2>开始考试</h2>
+            </div>
+            <div class="dashboard-btn admin-btn" onclick="window.location.href='admin.html'">
+                <i>📊</i>
+                <h2>后台信息</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

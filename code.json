@@ -1,0 +1,27 @@
+[
+  {
+    "title": "使用turtle绘制一个圆",
+    "description": "",
+    "code": "#导入turtle库\nimport turtle\n#画笔的宽度为5\nturtle.width(5)\n#画笔的颜色为红色\nturtle.color('red')\n#绘制半径为50像素的圆\nturtle.circle(50)\n#关闭turtle,一般使用完turtle后添加\nturtle.hideturtle()\nturtle.done()\n\n"
+  },
+  {
+    "title": "使用turtle绘制相切圆",
+    "description": "",
+    "code": "#导入turtle库\nimport turtle\n#画笔的宽度为5\nturtle.width(5)\n#画笔的颜色为红色\nturtle.color('red')\n#绘制半径为50像素的圆\nturtle.circle(50)\n#画笔的颜色为橙色\nturtle.color('orange')\n#绘制半径为70像素的圆\nturtle.circle(70)\n#画笔的颜色为绿色\nturtle.color('green')\n#绘制半径为100像素的圆\nturtle.circle(100)\n#隐藏箭头\nturtle.hideturtle()\n#关闭turtle,一般使用完turtle后添加\nturtle.done()\n"
+  },
+  {
+    "title": "绘制同心圆",
+    "description": "绘制一组同心圆(5个)，要求圆的半径为20像素，每向外一层圆的半径增加20像素。",
+    "code": "#绘制同心圆\nimport turtle\nturtle.circle(20)\n#抬笔\nturtle.penup()\n#移动到某一个位置\nturtle.goto(0,-20)\n#落笔\nturtle.pendown()\nturtle.circle(40)\nturtle.penup()\nturtle.goto(0,-40)\nturtle.pendown()\nturtle.circle(60)\nturtle.penup()\nturtle.goto(0,-60)\nturtle.pendown()\nturtle.circle(80)\nturtle.penup()\nturtle.goto(0,-80)\nturtle.pendown()\nturtle.circle(100)\n#隐藏箭头\nturtle.hideturtle()\n#关闭turtle,一般使用完turtle后添加\nturtle.done()\n\n\n\n\n\n"
+  },
+  {
+    "title": "优化同心圆代码",
+    "description": "",
+    "code": "\n#绘制同心圆\nimport turtle\n\n#抬笔\nturtle.penup()\n#移动到某一个位置\nturtle.goto(0,-20)\n\n#优化代码\nfrom turtle import *\n#定义绘制圆的函数\ndef drawCircle(n):\n    penup()\n    goto(0,-n)\n    pendown()\n    circle(n)\n#采用循环的方式来完成\nfor i in range(20,20*5+20,20):\n    drawCircle(i)\n#隐藏箭头\nhideturtle()\n#turtle绘制完毕，不关闭窗口\ndone()"
+  },
+  {
+    "title": "函数定义和使用",
+    "description": "展示如何定义函数，处理不同参数和返回值。",
+    "code": "# 定义一个计算面积的函数\ndef calculate_area(shape, *args):\n    if shape == \"rectangle\":\n        length, width = args\n        return length * width\n    elif shape == \"circle\":\n        radius, = args\n        return 3.14 * radius ** 2\n    else:\n        return \"Unsupported shape\"\n\n# 使用函数\nprint(\"矩形面积:\", calculate_area(\"rectangle\", 4, 5)) # 输出: 20\nprint(\"圆形面积:\", calculate_area(\"circle\", 3)) # 输出: 28.26"
+  }
+]
