@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>电子学会 Python 1级考试模拟系统</title>
+    <title>登录 - 电子学会Python考试系统</title>
     <style>
         * {
             margin: 0;
@@ -14,921 +14,124 @@
         body {
             background: linear-gradient(135deg, #1a2980, #26d0ce);
             min-height: 100vh;
-            padding: 20px;
-            color: #2c3e50;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
-        .container {
+        .login-container {
             width: 100%;
-            max-width: 1400px;
+            max-width: 400px;
             background: rgba(255, 255, 255, 0.97);
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-        }
-        header {
+            padding: 40px;
             text-align: center;
-            padding: 25px 0;
-            background: linear-gradient(90deg, #2c3e50, #4a6491);
-            color: white;
-            border-bottom: 3px solid #3498db;
-            position: relative;
         }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        .login-header {
+            margin-bottom: 30px;
         }
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        .content-container {
-            display: flex;
-            min-height: 70vh;
-        }
-        /* 左侧题目区域 */
-        .questions-section {
-            flex: 3;
-            padding: 30px;
-            overflow-y: auto;
-            height: 70vh;
-            background: #f9f9f9;
-        }
-        .question {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid #3498db;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .question:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        .question-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+        .login-header h1 {
             color: #2c3e50;
-            line-height: 1.5;
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .login-header p {
+            color: #7f8c8d;
+            font-size: 1rem;
         }
-        .option {
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        .input-group input {
+            width: 100%;
             padding: 15px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            font-size: 1.1rem;
-            position: relative;
-        }
-        .option:hover {
-            background-color: #f5f9ff;
-            border-color: #3498db;
-        }
-        .option input {
-            margin-right: 15px;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        .option-label {
-            flex: 1;
-            cursor: pointer;
-        }
-        /* 答题状态 */
-        .correct {
-            background-color: #e8f5e9 !important;
-            border-color: #4caf50 !important;
-            color: #2e7d32;
-        }
-        .incorrect {
-            background-color: #ffebee !important;
-            border-color: #f44336 !important;
-            color: #c62828;
-        }
-        /* 判断题特殊样式 */
-        .judgment-options {
-            display: flex;
-            gap: 20px;
-        }
-        .judgment-option {
-            flex: 1;
-            text-align: center;
-            padding: 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            cursor: pointer;
+            font-size: 1rem;
             transition: all 0.3s;
-            font-weight: bold;
-            font-size: 1.2rem;
         }
-        .judgment-option.true {
-            background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
-            border-color: #4caf50;
-            color: #2e7d32;
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
         }
-        .judgment-option.false {
-            background: linear-gradient(to bottom, #ffebee, #ffcdd2);
-            border-color: #f44336;
-            color: #c62828;
-        }
-        .judgment-option:hover {
-            transform: scale(1.05);
-        }
-        .judgment-option.selected {
-            box-shadow: 0 0 0 3px #3498db;
-        }
-        /* 右侧题号区域 */
-        .numbers-section {
-            flex: 1;
-            background: #f8f9fa;
-            padding: 30px;
-            border-left: 1px solid #e0e0e0;
-            height: 70vh;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-            color: #2c3e50;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #3498db;
-        }
-        .question-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .question-number {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px;
-            background: white;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #3498db;
-            cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .question-number:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-3px);
-        }
-        .question-number.active {
-            background: #3498db;
-            color: white;
-            transform: scale(1.05);
-        }
-        .question-number.answered {
-            background: #e8f5e9;
-            color: #4caf50;
-        }
-        .question-number.answered-incorrect {
-            background: #ffebee;
-            color: #f44336;
-        }
-        .submit-btn {
+        .login-btn {
+            width: 100%;
             background: linear-gradient(to right, #3498db, #2c3e50);
             color: white;
             border: none;
             padding: 15px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            margin: 20px 0;
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-top: 10px;
         }
-        .submit-btn:hover {
+        .login-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        .submit-btn:active {
+        .login-btn:active {
             transform: translateY(1px);
         }
-        .exam-info {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .info-item:last-child {
-            border-bottom: none;
-        }
-        .timer {
-            background: #2c3e50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            display: inline-block;
+        .error-message {
+            color: #e74c3c;
             margin-top: 10px;
-        }
-        .question-type {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            margin-right: 10px;
-        }
-        /* 响应式设计 */
-        @media (max-width: 900px) {
-            .content-container {
-                flex-direction: column;
-            }
-            .numbers-section {
-                border-left: none;
-                border-top: 1px solid #e0e0e0;
-            }
-            .questions-section, .numbers-section {
-                height: auto;
-            }
-        }
-        /* 弹窗样式 */
-        .modal {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: white;
-            padding: 40px 30px 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            position: relative;
-        }
-        .modal-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
-        }
-        .modal-message {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        .modal-btn {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 0 10px;
-        }
-        .modal-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-        .incomplete-list {
-            text-align: left;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .incomplete-item {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-        }
-        .incomplete-item:last-child {
-            border-bottom: none;
-        }
-        .footer-note {
-            text-align: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        .refresh-notice {
-            background: #e3f2fd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        .load-status {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            z-index: 2000;
-        }
-        /* 新增的得分颜色样式 */
-        .pass {
-            color: #4CAF50; /* 绿色 */
-            font-weight: bold;
-        }
-        .fail {
-            color: #f44336; /* 红色 */
-            font-weight: bold;
-        }
-        /* 弹窗关闭按钮 */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
-            font-weight: bold;
-            color: #777;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .close-btn:hover {
-            color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- 题库加载状态指示器 -->
-    <div class="load-status" id="loadStatus">题库加载中...</div>
-    <div class="container">
-        <header>
-            <h1>电子学会 Python 1级考试模拟系统</h1>
-            <p>2025年03月考试 - 单选题（共25题） + 判断题（共10题）=35题，共70分</p>
-        </header>
-        <div class="content-container">
-            <!-- 左侧题目区域 -->
-            <div class="questions-section" id="questionsContainer">
-                <div class="question" style="text-align: center; padding: 50px;">
-                    <h2>正在加载题目，请稍候...</h2>
-                    <div class="progress-bar" style="margin: 30px auto; width: 300px;">
-                        <div class="progress" id="loadingProgress" style="width: 0%; height: 20px;"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- 右侧题号区域 -->
-            <div class="numbers-section">
-                <div class="section-title">题目导航</div>
-                <div class="question-group">
-                    <div class="question-group-title">选择题 (1-25)</div>
-                    <div class="question-grid" id="choiceGrid">
-                        <!-- 选择题题号将通过JS生成 -->
-                    </div>
-                </div>
-                <div class="question-group">
-                    <div class="question-group-title">判断题 (26-35)</div>
-                    <div class="question-grid" id="judgmentGrid">
-                        <!-- 判断题题号将通过JS生成 -->
-                    </div>
-                </div>
-                <button class="submit-btn" id="submitBtn" disabled>提交试卷</button>
-                <div class="exam-info">
-                    <div class="section-title">考试信息</div>
-                    <div class="info-item">
-                        <span>总题数：</span>
-                        <span>35题</span>
-                    </div>
-                    <div class="info-item">
-                        <span>已答：</span>
-                        <span id="answeredCount">0题</span>
-                    </div>
-                    <div class="info-item">
-                        <span>得分：</span>
-                        <span id="scoreDisplay">0分</span>
-                    </div>
-                    <div class="info-item">
-                        <span>考试时间：</span>
-                        <div class="timer" id="timer">40:00</div>
-                    </div>
-                </div>
-                <div class="refresh-notice">
-                    提示：刷新页面将重新生成随机试卷
-                </div>
-            </div>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>欢迎回来</h1>
+            <p>请登录您的账户</p>
         </div>
-        <div class="footer-note">
-            题库包含525道选择题和210道判断题 | 每次考试随机抽取35题
-        </div>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" required placeholder="请输入用户名">
+            </div>
+            <div class="input-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" required placeholder="请输入密码">
+            </div>
+            <div id="errorMessage" class="error-message">用户名或密码错误</div>
+            <button type="submit" class="login-btn">登录</button>
+        </form>
     </div>
-    <!-- 确认弹窗 -->
-    <div class="modal" id="confirmModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeConfirmModal">&times;</span>
-            <h2 class="modal-title">确认提交</h2>
-            <div class="modal-message" id="confirmMessage">
-                <!-- 内容将通过JS填充 -->
-            </div>
-            <div>
-                <button class="modal-btn" id="cancelSubmit">取消</button>
-                <button class="modal-btn" id="confirmSubmit">提交</button>
-            </div>
-        </div>
-    </div>
-    <!-- 结果弹窗 -->
-    <div class="modal" id="resultModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeResultModal">&times;</span>
-            <h2 class="modal-title">考试结果</h2>
-            <div class="modal-message" id="resultMessage">
-                <!-- 结果信息将通过JS填充 -->
-            </div>
-            <button class="modal-btn" id="closeResultBtn">关闭</button>
-        </div>
-    </div>
-    <!-- 引入题库文件 -->
-    <script src="question_bank.js"></script>
+
     <script>
-        // 当前考试题目
-        let currentExam = {
-            multipleChoice: [],
-            trueFalse: []
-        };
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-        // 用户答案
-        let userAnswers = {};
-
-        // 计时器相关
-        let timerInterval = null;
-        let examStarted = false;
-        let minutes = 40;
-        let seconds = 0;
-        const timerElement = document.getElementById('timer');
-
-        // DOM元素
-        const questionsContainer = document.getElementById('questionsContainer');
-        const choiceGrid = document.getElementById('choiceGrid');
-        const judgmentGrid = document.getElementById('judgmentGrid');
-        const submitBtn = document.getElementById('submitBtn');
-        const answeredCountElement = document.getElementById('answeredCount');
-        const scoreDisplayElement = document.getElementById('scoreDisplay');
-        
-        // 弹窗相关元素
-        const confirmModal = document.getElementById('confirmModal');
-        const confirmMessage = document.getElementById('confirmMessage');
-        const closeConfirmModal = document.getElementById('closeConfirmModal');
-        const cancelSubmit = document.getElementById('cancelSubmit');
-        const confirmSubmit = document.getElementById('confirmSubmit');
-        
-        const resultModal = document.getElementById('resultModal');
-        const resultMessage = document.getElementById('resultMessage');
-        const closeResultModal = document.getElementById('closeResultModal');
-        const closeResultBtn = document.getElementById('closeResultBtn');
-        
-        const loadStatus = document.getElementById('loadStatus');
-        const loadingProgress = document.getElementById('loadingProgress');
-
-        // 初始化考试
-        function initExam() {
-            // 更新加载状态
-            loadStatus.textContent = "题库加载完成，正在生成试卷...";
-            loadingProgress.style.width = "100%";
-
-            // 生成随机试卷
-            generateRandomExam();
-
-            // 生成题目
-            renderQuestions();
-
-            // 生成题号导航
-            renderQuestionNumbers();
-
-            // 初始化用户答案
-            initUserAnswers();
-
-            // 更新进度
-            updateProgress();
-
-            // 隐藏加载状态
-            setTimeout(() => {
-                loadStatus.style.display = "none";
-                submitBtn.disabled = false;
-            }, 1000);
-        }
-
-        // 生成随机试卷
-        function generateRandomExam() {
-            // 清空当前考试
-            currentExam.multipleChoice = [];
-            currentExam.trueFalse = [];
-
-            // 从选择题题库中随机抽取25题
-            if (questionBank.multipleChoice.length > 0) {
-                const shuffledChoices = [...questionBank.multipleChoice].sort(() => 0.5 - Math.random());
-                currentExam.multipleChoice = shuffledChoices.slice(0, 25).map((q, index) => {
-                    return {
-                        ...q,
-                        displayId: index + 1
-                    };
-                });
-            }
-
-            // 从判断题题库中随机抽取10题
-            if (questionBank.trueFalse.length > 0) {
-                const shuffledJudgments = [...questionBank.trueFalse].sort(() => 0.5 - Math.random());
-                currentExam.trueFalse = shuffledJudgments.slice(0, 10).map((q, index) => {
-                    return {
-                        ...q,
-                        displayId: index + 26
-                    };
-                });
-            }
-        }
-
-        // 初始化用户答案对象
-        function initUserAnswers() {
-            userAnswers = {};
-
-            // 选择题
-            currentExam.multipleChoice.forEach(q => {
-                userAnswers[`q${q.displayId}`] = null;
-            });
-
-            // 判断题
-            currentExam.trueFalse.forEach(q => {
-                userAnswers[`q${q.displayId}`] = null;
-            });
-        }
-
-        // 渲染题目
-        function renderQuestions() {
-            questionsContainer.innerHTML = '';
-
-            // 渲染选择题（1-25题）
-            currentExam.multipleChoice.forEach(q => {
-                const questionElement = document.createElement('div');
-                questionElement.className = 'question';
-                questionElement.id = `q${q.displayId}`;
-
-                // 随机排序选项
-                const shuffledOptions = [...q.options].sort(() => 0.5 - Math.random());
-
-                questionElement.innerHTML = `
-                    <div class="question-title">
-                        <span class="question-type">选择题</span>
-                        ${q.displayId}. ${q.question}
-                    </div>
-                    <div class="options">
-                        ${shuffledOptions.map((option, index) => `
-                            <div class="option">
-                                <input type="radio" name="q${q.displayId}" id="q${q.displayId}${String.fromCharCode(65 + index)}" value="${option}">
-                                <label class="option-label" for="q${q.displayId}${String.fromCharCode(65 + index)}">${String.fromCharCode(65 + index)}. ${option}</label>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-
-                questionsContainer.appendChild(questionElement);
-            });
-
-            // 渲染判断题（26-35题）
-            currentExam.trueFalse.forEach(q => {
-                const questionElement = document.createElement('div');
-                questionElement.className = 'question';
-                questionElement.id = `q${q.displayId}`;
-
-                questionElement.innerHTML = `
-                    <div class="question-title">
-                        <span class="question-type">判断题</span>
-                        ${q.displayId}. ${q.question}
-                    </div>
-                    <div class="judgment-options">
-                        <div class="judgment-option true" data-value="正确">正确</div>
-                        <div class="judgment-option false" data-value="错误">错误</div>
-                    </div>
-                `;
-
-                questionsContainer.appendChild(questionElement);
-            });
-
-            // 添加事件监听器
-            addEventListeners();
-        }
-
-        // 生成题号导航
-        function renderQuestionNumbers() {
-            choiceGrid.innerHTML = '';
-            judgmentGrid.innerHTML = '';
-
-            // 选择题题号（1-25）
-            for (let i = 1; i <= 25; i++) {
-                const numberElement = document.createElement('div');
-                numberElement.className = 'question-number';
-                numberElement.textContent = i;
-                numberElement.setAttribute('data-id', `q${i}`);
-                numberElement.addEventListener('click', function() {
-                    scrollToQuestion(this.getAttribute('data-id'));
-                });
-                choiceGrid.appendChild(numberElement);
-            }
-
-            // 判断题题号（26-35）
-            for (let i = 26; i <= 35; i++) {
-                const numberElement = document.createElement('div');
-                numberElement.className = 'question-number';
-                numberElement.textContent = i;
-                numberElement.setAttribute('data-id', `q${i}`);
-                numberElement.addEventListener('click', function() {
-                    scrollToQuestion(this.getAttribute('data-id'));
-                });
-                judgmentGrid.appendChild(numberElement);
-            }
-        }
-
-        // 滚动到指定题目
-        function scrollToQuestion(questionId) {
-            const questionElement = document.getElementById(questionId);
-            if (questionElement) {
-                questionElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // 更新活动题号样式
-                document.querySelectorAll('.question-number').forEach(el => {
-                    el.classList.remove('active');
-                });
-                document.querySelector(`.question-number[data-id="${questionId}"]`).classList.add('active');
-            }
-        }
-
-        // 添加事件监听器
-        function addEventListeners() {
-            // 选择题选项点击事件
-            document.querySelectorAll('.option input[type="radio"]').forEach(radio => {
-                radio.addEventListener('click', function() {
-                    if (!examStarted) {
-                        startExamTimer();
-                    }
-                    const questionId = this.name;
-                    userAnswers[questionId] = this.value;
-                    
-                    // 更新进度
-                    updateProgress();
-                });
-            });
-
-            // 判断题选项点击事件
-            document.querySelectorAll('.judgment-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    if (!examStarted) {
-                        startExamTimer();
-                    }
-                    const questionId = this.closest('.question').id;
-                    const value = this.getAttribute('data-value');
-                    
-                    // 移除同一题目下的其他选中状态
-                    this.closest('.judgment-options').querySelectorAll('.judgment-option').forEach(el => {
-                        el.classList.remove('selected');
-                    });
-                    
-                    // 设置当前选中状态
-                    this.classList.add('selected');
-                    
-                    // 保存答案
-                    userAnswers[questionId] = value;
-                    
-                    // 更新进度
-                    updateProgress();
-                });
-            });
-
-            // 提交按钮事件
-            submitBtn.addEventListener('click', checkBeforeSubmit);
-            
-            // 确认弹窗事件
-            closeConfirmModal.addEventListener('click', () => confirmModal.style.display = 'none');
-            cancelSubmit.addEventListener('click', () => confirmModal.style.display = 'none');
-            confirmSubmit.addEventListener('click', () => {
-                confirmModal.style.display = 'none';
-                submitExam(true);
-            });
-            
-            // 结果弹窗事件
-            closeResultModal.addEventListener('click', () => resultModal.style.display = 'none');
-            closeResultBtn.addEventListener('click', () => resultModal.style.display = 'none');
-        }
-
-        // 开始考试倒计时
-        function startExamTimer() {
-            if (examStarted) return;
-            examStarted = true;
-            timerInterval = setInterval(updateTimer, 1000);
-        }
-
-        // 更新倒计时
-        function updateTimer() {
-            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (minutes === 0 && seconds === 0) {
-                clearInterval(timerInterval);
-                submitExam();
-                alert("考试时间结束！");
+            // 模拟登录验证，实际应用中应通过AJAX与后端交互
+            if (username === 'admin' && password === 'admin123') {
+                // 登录成功，跳转到主菜单页面
+                window.location.href = 'dashboard.html';
             } else {
-                if (seconds === 0) {
-                    minutes--;
-                    seconds = 59;
-                } else {
-                    seconds--;
-                }
+                // 显示错误信息
+                document.getElementById('errorMessage').style.display = 'block';
             }
-        }
-
-        // 更新答题进度
-        function updateProgress() {
-            const totalQuestions = Object.keys(userAnswers).length;
-            let answeredCount = 0;
-            
-            // 计算已答题数量
-            for (const key in userAnswers) {
-                if (userAnswers[key] !== null) {
-                    answeredCount++;
-                }
-            }
-            
-            // 更新UI
-            answeredCountElement.textContent = `${answeredCount}题`;
-            
-            // 更新题号状态
-            updateQuestionNumberStatus();
-        }
-
-        // 更新题号状态
-        function updateQuestionNumberStatus() {
-            for (const questionId in userAnswers) {
-                const numberElement = document.querySelector(`.question-number[data-id="${questionId}"]`);
-                if (userAnswers[questionId] !== null) {
-                    numberElement.classList.add('answered');
-                } else {
-                    numberElement.classList.remove('answered', 'answered-incorrect');
-                }
-            }
-        }
-
-        // 提交前检查
-        function checkBeforeSubmit() {
-            // 检查未完成题目
-            const incompleteQuestions = [];
-            for (const questionId in userAnswers) {
-                if (userAnswers[questionId] === null) {
-                    const id = questionId.substring(1);
-                    incompleteQuestions.push(id);
-                }
-            }
-            
-            if (incompleteQuestions.length > 0) {
-                // 显示确认弹窗
-                confirmMessage.innerHTML = `
-                    <p>您还有 ${incompleteQuestions.length} 道题目未完成：</p>
-                    <div class="incomplete-list">
-                        ${incompleteQuestions.map(id => `<div class="incomplete-item">${id}</div>`).join('')}
-                    </div>
-                    <p>是否仍要提交？</p>
-                `;
-                confirmModal.style.display = 'flex';
+            if (username === '123' && password === '123') {
+                // 登录成功，跳转到主菜单页面
+                window.location.href = 'dashboard.html';
             } else {
-                // 直接提交
-                submitExam();
+                // 显示错误信息
+                document.getElementById('errorMessage').style.display = 'block';
             }
-        }
-
-        // 提交试卷
-        function submitExam() {
-            // 停止计时器
-            clearInterval(timerInterval);
-            
-            // 计算得分
-            let correctCount = 0;
-            
-            // 选择题评分
-            currentExam.multipleChoice.forEach(q => {
-                const questionId = `q${q.displayId}`;
-                const userAnswer = userAnswers[questionId];
-                
-                if (userAnswer === q.answer) {
-                    correctCount++;
-                    // 标记正确
-                    document.querySelectorAll(`.question#${questionId} .option`).forEach(option => {
-                        if (option.querySelector('input').value === q.answer) {
-                            option.classList.add('correct');
-                        }
-                    });
-                    document.querySelector(`.question-number[data-id="${questionId}"]`).classList.add('answered');
-                } else {
-                    // 标记错误和正确答案
-                    document.querySelectorAll(`.question#${questionId} .option`).forEach(option => {
-                        const input = option.querySelector('input');
-                        if (input.value === userAnswer) {
-                            option.classList.add('incorrect');
-                        }
-                        if (input.value === q.answer) {
-                            option.classList.add('correct');
-                        }
-                    });
-                    document.querySelector(`.question-number[data-id="${questionId}"]`).classList.add('answered-incorrect');
-                }
-            });
-            
-            // 判断题评分
-            currentExam.trueFalse.forEach(q => {
-                const questionId = `q${q.displayId}`;
-                const userAnswer = userAnswers[questionId];
-                
-                if (userAnswer === q.answer) {
-                    correctCount++;
-                    // 标记正确
-                    const selectedOption = document.querySelector(`.question#${questionId} .judgment-option[data-value="${userAnswer}"]`);
-                    selectedOption.classList.add('selected', 'correct');
-                    document.querySelector(`.question-number[data-id="${questionId}"]`).classList.add('answered');
-                } else {
-                    // 标记错误和正确答案
-                    if (userAnswer) {
-                        const selectedOption = document.querySelector(`.question#${questionId} .judgment-option[data-value="${userAnswer}"]`);
-                        selectedOption.classList.add('selected', 'incorrect');
-                    }
-                    const correctOption = document.querySelector(`.question#${questionId} .judgment-option[data-value="${q.answer}"]`);
-                    correctOption.classList.add('correct');
-                    document.querySelector(`.question-number[data-id="${questionId}"]`).classList.add('answered-incorrect');
-                }
-            });
-            
-            // 计算得分（每题2分）
-            const score = correctCount * 2;
-            
-            // 更新得分显示
-            scoreDisplayElement.textContent = `${score}分`;
-            scoreDisplayElement.className = score >= 60 ? 'pass' : 'fail';
-            
-            // 显示结果弹窗
-            resultMessage.innerHTML = `
-                <p>考试已完成！</p>
-                <p>您的得分：<strong class="${score >= 60 ? 'pass' : 'fail'}">${score}分</strong></p>
-                <p>正确题数：<strong>${correctCount}/35</strong></p>
-                <p>错题已标记为红色，正确答案已标记为绿色。</p>
-            `;
-            resultModal.style.display = 'flex';
-            
-            // 禁用提交按钮
-            submitBtn.disabled = true;
-        }
-
-        // 初始化考试
-        window.onload = function() {
-            // 模拟题库加载进度
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += 5;
-                loadingProgress.style.width = `${progress}%`;
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    // 初始化考试
-                    initExam();
-                }
-            }, 100);
-        };
+        });
     </script>
 </body>
 </html>
